@@ -1,15 +1,20 @@
 package com.example.pizzaapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pizzaapp.databinding.PizzaCardBinding
 
 class PizzaAdapter(private val pizzas: List<PizzaModel>) :
-    RecyclerView.Adapter<PizzaAdapter.PizzaViewHolder>() {
+    RecyclerView.Adapter<PizzaAdapter.PizzaViewHolder>(), Filterable {
+
+    private var filteredPizzas: List<PizzaModel> = pizzas
 
     class PizzaViewHolder(val binding: PizzaCardBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,11 +26,11 @@ class PizzaAdapter(private val pizzas: List<PizzaModel>) :
     }
 
     override fun getItemCount(): Int {
-        return pizzas.size
+        return filteredPizzas.size
     }
 
     override fun onBindViewHolder(holder: PizzaViewHolder, position: Int) {
-        val pizza = pizzas[position]
+        val pizza = filteredPizzas[position]
         val context = holder.itemView.context
 
         with(holder.binding) {
@@ -41,6 +46,26 @@ class PizzaAdapter(private val pizzas: List<PizzaModel>) :
                     putExtra("pizza_image_url", pizza.imageUrl)
                 }
                 context.startActivity(intent)
+            }
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val queryString = constraint?.toString()?.lowercase()
+                val filteredList = if (queryString.isNullOrEmpty()) {
+                    pizzas
+                } else {
+                    pizzas.filter { it.name.lowercase().contains(queryString) }
+                }
+                return FilterResults().apply { values = filteredList }
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredPizzas = results?.values as List<PizzaModel>? ?: listOf()
+                notifyDataSetChanged()
             }
         }
     }

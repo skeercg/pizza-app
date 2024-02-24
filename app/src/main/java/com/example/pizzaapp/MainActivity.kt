@@ -2,9 +2,9 @@ package com.example.pizzaapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pizzaapp.databinding.ActivityMainBinding
-import com.example.pizzaapp.databinding.ActivityPizzaDetailsBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -21,5 +21,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = manager
         binding.recyclerView.adapter = pizzaAdapter
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                pizzaAdapter.filter.filter(newText)
+                return false
+            }
+        })
     }
 }
