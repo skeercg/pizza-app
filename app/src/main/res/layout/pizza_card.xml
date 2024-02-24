@@ -24,7 +24,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="First Text"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -34,7 +33,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Second Text"
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp" />
 
@@ -42,7 +40,6 @@
                 android:id="@+id/textViewPizzaPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price Text"
                 android:textColor="@color/purple_500"
                 android:textSize="16sp" />
 
