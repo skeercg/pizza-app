@@ -5,10 +5,10 @@ Android course assignment №1.
 ## Features
 
 ### Viewing available pizzas
-![Screenshot 1](resources/1.png)
+<img src="resources/1.png" alt="Screenshot 1" width="400"/>
 
 ### Searching for pizza
-![Screenshot 2](resources/2.png)
+<img src="resources/2.png" alt="Screenshot 2" width="400"/>
 
 ### Viewing details and selecting desired size option
-![Screenshot 3](resources/3.png)
+<img src="resources/3.png" alt="Screenshot 3" width="400"/>
